@@ -4,29 +4,22 @@
   const todosJson = localStorage.getItem("todos");
   let todoList = todosJson ? JSON.parse(todosJson) : [];
   let newItem = "";
+  $: localStorage.setItem("todos", JSON.stringify(todoList));
 
-  const updateLocalStorage = () => {
-    localStorage.setItem("todos", JSON.stringify(todoList));
-  };
   const handleAddTodo = () => {
     todoList = [...todoList, { text: newItem, completed: false }];
     newItem = "";
-    updateLocalStorage();
   };
   const handleAddToCompleted = (item) => {
     item.completed = true;
     todoList = todoList;
-    updateLocalStorage();
   };
   const handleRedoTodo = (item) => {
     item.completed = false;
     todoList = todoList;
-    updateLocalStorage();
   };
   const handleRemoveTodo = (item) => {
     todoList = todoList.filter((todo) => todo !== item);
-    localStorage.setItem("todos", JSON.stringify(todoList));
-    updateLocalStorage();
   };
 </script>
 
