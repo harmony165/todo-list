@@ -7,17 +7,16 @@
     todoList = [...todoList, { text: newItem, completed: false }];
     newItem = "";
   };
-  const handleAddToCompleted = (index) => {
-    todoList[index].completed = true;
+  const handleAddToCompleted = (item) => {
+    item.completed = true;
     todoList = todoList;
   };
-  const handleRedoTodo = (index) => {
-    todoList[index].completed = false;
+  const handleRedoTodo = (item) => {
+    item.completed = false;
     todoList = todoList;
   };
-  const handleRemoveTodo = (index) => {
-    todoList.splice(index, 1);
-    todoList = todoList;
+  const handleRemoveTodo = (item) => {
+    todoList = todoList.filter((todo) => todo !== item);
   };
 </script>
 
@@ -38,8 +37,8 @@
         {#if item.completed === false}
           <Todo
             todo={item}
-            on:remove={() => handleRemoveTodo(index)}
-            on:complete={() => handleAddToCompleted(index)}
+            on:remove={() => handleRemoveTodo(item)}
+            on:complete={() => handleAddToCompleted(item)}
           />
         {/if}
       {/each}
@@ -50,8 +49,8 @@
         {#if item.completed === true}
           <Todo
             todo={item}
-            on:remove={() => handleRemoveTodo(index)}
-            on:redo={() => handleRedoTodo(index)}
+            on:remove={() => handleRemoveTodo(item)}
+            on:redo={() => handleRedoTodo(item)}
           />
         {/if}
       {/each}
