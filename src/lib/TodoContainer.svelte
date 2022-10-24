@@ -1,22 +1,27 @@
 <script>
   import Todo from "./Todo.svelte";
 
-  let todoList = [];
+  const todosJson = localStorage.getItem("todos");
+  let todoList = todosJson ? JSON.parse(todosJson) : [];
   let newItem = "";
   const handleAddTodo = () => {
     todoList = [...todoList, { text: newItem, completed: false }];
     newItem = "";
+    localStorage.setItem("todos", JSON.stringify(todoList));
   };
   const handleAddToCompleted = (item) => {
     item.completed = true;
     todoList = todoList;
+    localStorage.setItem("todos", JSON.stringify(todoList));
   };
   const handleRedoTodo = (item) => {
     item.completed = false;
     todoList = todoList;
+    localStorage.setItem("todos", JSON.stringify(todoList));
   };
   const handleRemoveTodo = (item) => {
     todoList = todoList.filter((todo) => todo !== item);
+    localStorage.setItem("todos", JSON.stringify(todoList));
   };
 </script>
 
