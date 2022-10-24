@@ -26,6 +26,7 @@
   const handleRemoveTodo = (item) => {
     todoList = todoList.filter((todo) => todo !== item);
     localStorage.setItem("todos", JSON.stringify(todoList));
+    updateLocalStorage();
   };
 </script>
 
